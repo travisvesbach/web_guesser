@@ -2,11 +2,29 @@ require 'sinatra'
 require 'sinatra/reloader'
 
 @@number = rand(100)
+@@counter = 6
 
 get '/' do
+	number = @@number
 	guess = params['guess'].to_i
 	output = check_guess(guess)
-	erb :index, :locals => {:number => @@number, :output => output}
+	if params['cheat'] == true
+		cheat = true
+	end
+
+	if output == "You got it right!"
+		@@number = rand(100)
+		@@counter = 5
+	elsif @@counter == 1
+		@@number = rand(100)
+		@@counter = 5
+		output = "You are out of guesses! A new number has been generated!"
+	else
+		@@counter -= 1
+	end
+
+	erb :index, :locals => {:number => number, :output => output}
+
 end
 
 def check_guess(guess)

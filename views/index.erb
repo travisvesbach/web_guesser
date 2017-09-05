@@ -7,18 +7,25 @@
 				background: red;
 			<% elsif output == "Too high!" or output == "Too low!" %>
 				background: pink;
-			<% else %>
+			<% elsif output == "You got it right!" %>
 				background: green
+			<% else %>
+				background: red;
 			<% end %>
 
 		}
 	</style>
 </head>
 <body>
+	<h1>Web Guesser</h1>
+	<h2>Guess the secret number in as few tries as possible</h2>
+	<h3>Guesses remaining: <%= @@counter %></h3>
+	<% if output %>
 	<p><%= output %></p>
-
-	<% if output == "You got it right!" %>
+	<% end %>
+	<% if output == "You got it right!"%>
 		<p>The secret number is <%= number %></p>
+		<p>A new secret number has been set!</p>
 	<% end %>
 
 	<form>
