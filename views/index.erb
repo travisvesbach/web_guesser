@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<style>
+		body {
+			<% if output.include? "Way" %>
+				background: red;
+			<% elsif output == "Too high!" or output == "Too low!" %>
+				background: pink;
+			<% else %>
+				background: green
+			<% end %>
+
+		}
+	</style>
 </head>
 <body>
 	<p><%= output %></p>
